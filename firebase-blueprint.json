@@ -1,0 +1,142 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Article mis en vente sur la plateforme Bee_store",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "number" },
+        "shopId": { "type": "string" }
+      },
+      "required": ["id", "name", "price"]
+    },
+    "Shop": {
+      "title": "Shop",
+      "description": "Boutique enregistrée sur Bee_store",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "referralCode": { "type": "string" },
+        "referralsCount": { "type": "number" },
+        "referralEarnings": { "type": "number" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "SponsorNotification": {
+      "title": "SponsorNotification",
+      "description": "Notification d'alerte envoyée au parrain lorsqu'un filleul crée une boutique",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sponsorId": { "type": "string" },
+        "sponsorPhone": { "type": "string" },
+        "sponsorReferralCode": { "type": "string" },
+        "newShopId": { "type": "string" },
+        "newShopName": { "type": "string" },
+        "newOwnerName": { "type": "string" },
+        "bonusEarned": { "type": "number" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "sponsorReferralCode", "newShopName", "bonusEarned", "message", "createdAt"]
+    },
+    "AdminNotification": {
+      "title": "AdminNotification",
+      "description": "Notification d'alerte pour l'administrateur",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "type", "title", "message", "createdAt"]
+    },
+    "VendorNotification": {
+      "title": "VendorNotification",
+      "description": "Notification pour les gérants de boutique",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "shopId": { "type": "string" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "shopId", "message", "createdAt"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Discussion privée PV entre acheteur, boutique ou administration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "shopId": { "type": "string" },
+        "shopName": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "lastMessageText": { "type": "string" },
+        "lastMessageTime": { "type": "string" },
+        "unreadCountBuyer": { "type": "number" },
+        "unreadCountVendor": { "type": "number" }
+      },
+      "required": ["id", "shopId", "shopName", "buyerId", "lastMessageText", "lastMessageTime"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Message individuel dans une discussion privée",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "expiresAt": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "conversationId", "senderId", "senderName", "senderRole", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Catalogue de produits"
+    },
+    "/shops/{shopId}": {
+      "schema": "Shop",
+      "description": "Boutiques et abonnements"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Fils de discussion privée et décisions administratives"
+    },
+    "/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Messages temps réel des conversations PV"
+    },
+    "/sponsor_notifications/{notifId}": {
+      "schema": "SponsorNotification",
+      "description": "Alertes de parrainage envoyées aux parrains dans Firestore"
+    },
+    "/admin_notifications/{notifId}": {
+      "schema": "AdminNotification",
+      "description": "Alertes administratives pour les parrainages et boutiques"
+    },
+    "/vendor_notifications/{notifId}": {
+      "schema": "VendorNotification",
+      "description": "Alertes commandes et gains pour les vendeurs"
+    }
+  }
+}

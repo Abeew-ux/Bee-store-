@@ -1,0 +1,76 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Products: everyone can read, shops and admins can publish or update
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Orders: public creation and tracking for Bee_store buyers and sellers
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Shops & Subscriptions: multi-vendor system with 1 000 FCFA/month verification
+    match /shops/{shopId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Vendor Notifications: real-time order alerts sent to shop owners
+    match /vendor_notifications/{notifId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Sponsor Notifications: real-time referral alerts sent to sponsors upon new shop creations
+    match /sponsor_notifications/{notifId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Admin Notifications: alerts for new shops, referrals, and orders
+    match /admin_notifications/{notifId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Users & Customer Accounts
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Coupons & Promos
+    match /coupons/{couponId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Reviews: customer product ratings and reviews
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Announcements: admin broadcasts and small announcements for users
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Trade Conversations: real-time private discussions (PV) between buyers, vendors and administration
+    match /conversations/{conversationId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Trade Messages: real-time PV messages with 7-day storage optimization
+    match /messages/{messageId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+  }
+}

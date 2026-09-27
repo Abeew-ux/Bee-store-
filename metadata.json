@@ -1,0 +1,6 @@
+{
+  "name": "Bee Store",
+  "description": "Application e-commerce mobile Bee Store multi-boutiques avec catégories gaming (recharge de jetons, comptes de jeux, abonnements), formulaires dynamiques par catégorie, parrainage avec réclamation WhatsApp et paiements directs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
